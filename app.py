@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import logging
+import logging, os
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from tgbot.config import mode, bot_token, bot_user_name, HEROKU_APP_NAME, NGROK_APP_NAME
 
@@ -21,7 +21,8 @@ if MODE == "dev":
     APP_NAME = NGROK_APP_NAME
 
 elif MODE == "prod":
-    PORT = "8443"
+    # PORT = "8443"
+    PORT = int(os.environ.get("PORT", "8443"))
     DOMAIN = ".herokuapp.com/"
     APP_NAME = HEROKU_APP_NAME
 
